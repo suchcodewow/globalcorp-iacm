@@ -7,8 +7,8 @@ variable "googleProject" {
     default="requiredbutmissing"
 }
 
-resource "google_sql_database_instance" "main" {
-  name             = "catalogdb-${var.uniqueIdentifier}"
+resource "google_sql_database_instance" "sql_instance" {
+  name             = "catalogdb"
   database_version = "MYSQL_8_0"
   region           = "us-east1"
   project = var.googleProject
