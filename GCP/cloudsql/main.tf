@@ -8,14 +8,14 @@ variable "googleProject" {
 }
 
 resource "google_sql_database_instance" "sql_instance" {
-  name             = "catalogdb"
+  name             = "catalogdb-${var.uniqueIdentifier}"
   database_version = "MYSQL_8_0"
-  region           = "us-east1"
+  region           = "us-central1"
   project = var.googleProject
 
   settings {
     # Second-generation instance tiers are based on the machine
     # type. See argument reference below.
-    tier = "db-f1-micro"
+    tier = "db-n1-standard-1"
   }
 }
