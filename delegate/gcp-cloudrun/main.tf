@@ -28,7 +28,7 @@ variable "delegateLogUrl" {
 }
 variable "googleServiceAccount" {
   type = string
-  default = ""
+  default = "1"
 }
 
 resource "google_cloud_run_v2_service" "default" {
