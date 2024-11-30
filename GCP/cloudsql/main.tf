@@ -22,6 +22,7 @@ variable "databaseName" {
 resource "google_sql_database" "database" {
   name     = var.databaseName
   instance = google_sql_database_instance.sql_instance.name
+  project = var.googleProject
 }
 
 resource "google_sql_database_instance" "sql_instance" {
