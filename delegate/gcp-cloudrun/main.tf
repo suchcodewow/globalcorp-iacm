@@ -40,6 +40,7 @@ resource "google_cloud_run_v2_service" "default" {
     # Send-Update -t 1 -c "Deploying Delegate" -r "gcloud run deploy $delegateName --memory=2Gi --port=3460 --image=harness/delegate:24.09.83909 --no-allow-unauthenticated --min-instances=1 --max-instances=1 --no-cpu-throttling --set-env-vars=JAVA_OPTS=$($config.Harness_JAVA_OPTS),ACCOUNT_ID=$($config.Harness_ACCOUNT_ID),DELEGATE_NAME=$delegateName,NEXT_GEN=true,DEPLOY_MODE=KUBERNETES,DELEGATE_TYPE=KUBERNETES,CLIENT_TOOLS_DOWNLOAD_DISABLED=true,DYNAMIC_REQUEST_HANDLING=false,DELEGATE_TOKEN=$($config.Harness_DELEGATE_TOKEN),LOG_STREAMING_SERVICE_URL=$($config.Harness_LOG_STREAMING_SERVICE_URL),MANAGER_HOST_AND_PORT=$($config.Harness_MANAGER_HOST_AND_PORT),INIT_SCRIPT= "
 
   template {
+    service_account = var.googleServiceAccount
     containers {
       image = "harness/delegate:24.09.83909"
       startup_probe {
