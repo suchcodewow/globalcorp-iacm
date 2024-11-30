@@ -26,6 +26,10 @@ variable "delegateLogUrl" {
     type = string
     default = "https://app.harness.io/gratis/log-service/"
 }
+variable "googleServiceAccount" {
+  type = string
+  default = ""
+}
 
 resource "google_cloud_run_v2_service" "default" {
   name     = "harness-delegate-${var.uniqueIdentifier}"
