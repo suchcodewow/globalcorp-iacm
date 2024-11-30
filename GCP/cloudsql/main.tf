@@ -14,9 +14,18 @@ variable "databaseTier" {
     type = string
     default="db-n1-standard-1"
 }
+variable "databaseName" {
+    type = string
+    default="primaryDatabase"
+}
+
+resource "google_sql_database" "database" {
+  name     = var.databaseName
+  instance = google_sql_database_instance.sql_instance.name
+}
 
 resource "google_sql_database_instance" "sql_instance" {
-  name             = "catalogdb-${var.uniqueIdentifier}"
+  name             = var.uniqueIdentifier
   database_version = "MYSQL_8_0"
   region           = var.googleRegion
   project = var.googleProject
