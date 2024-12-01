@@ -1,6 +1,9 @@
 output "instancename" {
   value = google_sql_database_instance.sql_instance.name
 }
+output "database" {
+  value = google_sql_database.database
+}
 
 variable "uniqueIdentifier" {
   type = string
