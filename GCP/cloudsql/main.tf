@@ -1,5 +1,5 @@
 output "instancename" {
-  value = google_sql_database_instance.sql_instance.name
+  value = google_sql_database_instance.sql_instance.connection_name
 }
 output "database" {
   value = google_sql_database.database.name
