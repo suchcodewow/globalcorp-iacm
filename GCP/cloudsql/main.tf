@@ -2,7 +2,7 @@ output "instancename" {
   value = google_sql_database_instance.sql_instance.name
 }
 output "database" {
-  value = google_sql_database.database
+  value = google_sql_database.database.name
 }
 
 variable "uniqueIdentifier" {
