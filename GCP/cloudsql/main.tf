@@ -49,7 +49,7 @@ resource "google_sql_database" "database" {
   deletion_policy = "ABANDON"
 }
 resource "google_sql_database" "database" {
-  name     = "gray"
+  name     = "green"
   instance = google_sql_database_instance.sql_instance.name
   project = var.googleProject
   deletion_policy = "ABANDON"
