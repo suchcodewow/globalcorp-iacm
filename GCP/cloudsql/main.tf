@@ -31,12 +31,14 @@ resource "google_sql_user" "users" {
   instance = google_sql_database_instance.sql_instance.name
   password = "password"
   project = var.googleProject
+  deletion_policy = "ABANDON"
 }
 
 resource "google_sql_database" "database" {
   name     = var.databaseName
   instance = google_sql_database_instance.sql_instance.name
   project = var.googleProject
+  deletion_policy = "ABANDON"
 }
 
 resource "google_sql_database_instance" "sql_instance" {
