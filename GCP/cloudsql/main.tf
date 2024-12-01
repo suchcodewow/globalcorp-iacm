@@ -1,3 +1,7 @@
+output "instancename" {
+  value = google_sql_database_instance.sql_instance.name
+}
+
 variable "uniqueIdentifier" {
   type = string
   default = "default"
@@ -19,6 +23,13 @@ variable "databaseName" {
     default="primaryDatabase"
 }
 
+resource "google_sql_user" "users" {
+  name     = "api"
+  instance = google_sql_database_instance.sql_instance.name
+  password = "password"
+  project = var.googleProject
+}
+
 resource "google_sql_database" "database" {
   name     = var.databaseName
   instance = google_sql_database_instance.sql_instance.name
@@ -30,10 +41,12 @@ resource "google_sql_database_instance" "sql_instance" {
   database_version = "MYSQL_8_0"
   region           = var.googleRegion
   project = var.googleProject
+  deletion_protection = false
 
   settings {
     # Second-generation instance tiers are based on the machine
     # type. See argument reference below.
     tier = var.databaseTier
+    
   }
 }
