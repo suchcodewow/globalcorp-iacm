@@ -30,6 +30,14 @@ variable "googleServiceAccount" {
   type = string
   default = ""
 }
+variable "proxyHost" {
+  type = string
+  default = ""
+}
+variable "proxyPort" {
+  type = string
+  default = ""
+}
 
 resource "google_cloud_run_v2_service" "default" {
   name     = "harness-delegate-${var.uniqueIdentifier}"
@@ -108,6 +116,14 @@ resource "google_cloud_run_v2_service" "default" {
             ./google-cloud-sdk/install.sh
             ./google-cloud-sdk/bin/gcloud init
             EOT
+      }
+      env {
+        name = "PROXY_HOST"
+        value = var.proxyHost
+      }
+      env {
+        name = "PROXY_PORT"
+        value = var.proxyPort
       }
       resources {
         # If true, garbage-collect CPU when once a request finishes
