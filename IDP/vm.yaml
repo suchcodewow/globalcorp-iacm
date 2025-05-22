@@ -1,0 +1,53 @@
+# Example workflow.yaml file
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: create-vm
+  description: Create a new virtual machine
+  icon: service-terraform
+spec:
+  type: environment
+  parameters:
+    - title: About your VM
+      required:
+        - bucket_name
+      properties:
+        projectId:
+          title: Project Identifier
+          description: Harness Project Identifier
+          type: string
+          ui:field: HarnessProjectPicker
+        cloud_provider:
+          title: Select Cloud Environment
+          type: string
+          enum:
+            - GCP
+            - Azure
+            - AWS
+          ui:widget: radio
+        bucket_name:
+          title: Cloud Bucket Name
+          type: string
+          description: Unique name for new bucket (max:18 characters)
+          maxLength: 18
+          pattern: "^([a-zA-Z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*$"
+        token:
+          title: Harness Token
+          type: string
+          ui:widget: password
+          ui:field: HarnessAuthToken
+  steps:
+    - id: trigger
+      name: Requesting Your New Environment
+      action: trigger:harness-custom-pipeline
+      input:
+        url: https://app.harness.io/ng/account/fjf_VfuITK2bBrMLg5xV7g/module/cd/orgs/eventIaCMCardinal/projects/setup/pipelines/iacm_vms/pipeline-studio/?storeType=INLINE
+        inputset:
+          cloud_provider: ${{ parameters.cloud_provider }}
+          bucket_name: ${{ parameters.bucket_name }}
+          requestor_name: ${{ user.entity.metadata.name }}
+        apikey: ${{ parameters.token }}
+  output:
+    links:
+      - title: Pipeline Details
+        url: ${{ steps.trigger.output.PipelineUrl }}
