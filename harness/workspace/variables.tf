@@ -25,12 +25,12 @@ variable "workspace_name" {
 
 variable "workspace_provisioner_type" {
   type    = string
-  default = "terraform"
+  default = "opentofu"
 }
 
 variable "workspace_provisioner_version" {
   type    = string
-  default = "1.5.6"
+  default = "1.8.8"
 }
 
 variable "workspace_repository_name" {

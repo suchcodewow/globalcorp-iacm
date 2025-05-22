@@ -1,0 +1,19 @@
+resource "google_compute_instance" "default" {
+  name         = var.vm_name
+  machine_type = "n1-standard-1"
+  zone         = "us-central1-a"
+  project      = "ecardinalhealth-459415"
+
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-minimal-2210-kinetic-amd64-v20230126"
+    }
+  }
+
+  network_interface {
+    network = "default"
+    access_config {}
+  }
+}
+
