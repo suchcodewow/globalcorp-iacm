@@ -3,11 +3,12 @@ resource "google_compute_instance" "default" {
   machine_type = "n1-standard-1"
   zone         = "us-central1-a"
   project      = "ecardinalhealth-459415"
+  tags         = [var.vm_owner]
 
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-minimal-2210-kinetic-amd64-v20230126"
+      image = var.vm_type
     }
   }
 
