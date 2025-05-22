@@ -3,10 +3,6 @@ variable "vm_name" {
   type = string
 }
 
-variable "vm_name" {
-  type = string
-}
-
 variable "vm_owner" {
   type = string
 }
